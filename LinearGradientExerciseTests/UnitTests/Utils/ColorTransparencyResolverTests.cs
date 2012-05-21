@@ -1,26 +1,27 @@
 ﻿using LinearGradientExercise.Utils;
 using NUnit.Framework;
+using System;
 
-namespace LinearGradientExerciseTests.Util
+namespace LinearGradientExerciseTests.UnitTests.Utils
 {
     [TestFixture]
-    public class ColorTransparencyHelperTests
+    public class ColorTransparencyResolverTests
     {
-        private readonly ColorTransparencyHelper colorTransparencyHelper;
+        private readonly ColorTransparencyResolver colorTransparencyResolver;
         private const int WhiteColor = 255;
         private const int BlackColor = 0;
 
         private const int MedianColor = 255/2;
 
-        public ColorTransparencyHelperTests()
+        public ColorTransparencyResolverTests()
         {
-            colorTransparencyHelper = new ColorTransparencyHelper();
+            colorTransparencyResolver = new ColorTransparencyResolver();
         }
 
         [Test]
         public void CalculateTransparentColor_WithWhiteOpacityColor_Color_0_Opacity_0_5_ShouldIncreaseTheColor()
         {
-            var lighterColor = colorTransparencyHelper.CalculateTransparentColor(0, WhiteColor, 0.5);
+            var lighterColor = colorTransparencyResolver.CalculateTransparentColor(0, WhiteColor, 0.5);
             
             Assert.That(lighterColor > 0);
         }
@@ -28,7 +29,7 @@ namespace LinearGradientExerciseTests.Util
         [Test]
         public void CalculateTransparentColor_WithWhiteOpacityColor_Color_0_Opacity_0_5_ShouldDecreaseTheColorWithHalf()
         {
-            var darkerColor = colorTransparencyHelper.CalculateTransparentColor(0, WhiteColor, 0.5);
+            var darkerColor = colorTransparencyResolver.CalculateTransparentColor(0, WhiteColor, 0.5);
 
             Assert.That((int)darkerColor, Is.InRange(MedianColor - 1, MedianColor + 1));
         }
@@ -36,7 +37,7 @@ namespace LinearGradientExerciseTests.Util
         [Test]
         public void CalculateTransparentColor_WithWhiteOpacityColor_Color_255_Opacity_0_5_ShouldNotGoOverMaxColor_255()
         {
-            var lighterColor = colorTransparencyHelper.CalculateTransparentColor(255, WhiteColor, 0.5);
+            var lighterColor = colorTransparencyResolver.CalculateTransparentColor(255, WhiteColor, 0.5);
 
             Assert.That(lighterColor <= 255);
         }
@@ -44,7 +45,7 @@ namespace LinearGradientExerciseTests.Util
         [Test]
         public void CalculateTransparentColor_WithBlackOpacityColor_Color_255_Opacity_0_5_ShouldDecreaseTheColor()
         {
-            var darkerColor = colorTransparencyHelper.CalculateTransparentColor(255, BlackColor, 0.5);
+            var darkerColor = colorTransparencyResolver.CalculateTransparentColor(255, BlackColor, 0.5);
 
             Assert.That(darkerColor < 255);
         }
@@ -52,7 +53,7 @@ namespace LinearGradientExerciseTests.Util
         [Test]
         public void CalculateTransparentColor_WithBlackOpacityColor_Color_255_Opacity_0_5_ShouldIncreaseTheColorWithHalf()
         {
-            var lighterColor = colorTransparencyHelper.CalculateTransparentColor(255, BlackColor, 0.5);
+            var lighterColor = colorTransparencyResolver.CalculateTransparentColor(255, BlackColor, 0.5);
 
             Assert.That((int)lighterColor, Is.InRange(MedianColor - 1, MedianColor + 1));
         }
@@ -60,9 +61,23 @@ namespace LinearGradientExerciseTests.Util
         [Test]
         public void CalculateTransparentColor_WithBlackOpacityColor_Color_0_Opacity_0_5_ShouldNotGoUnderMinColor_0()
         {
-            var lighterColor = colorTransparencyHelper.CalculateTransparentColor(0, BlackColor, 0.5);
+            var lighterColor = colorTransparencyResolver.CalculateTransparentColor(0, BlackColor, 0.5);
 
             Assert.That(lighterColor >= 0);
+        }
+
+        [Test]
+        public void CalculateTransparentColor_WithOpacityLessThan_0_ShouldThrowArgumentException()
+        {
+            Assert.Throws<ArgumentException>(
+                () => colorTransparencyResolver.CalculateTransparentColor(0, WhiteColor, -0.1));
+        }
+
+        [Test]
+        public void CalculateTransparentColor_WithOpacityHigherThan_1_ShouldThrowArgumentException()
+        {
+            Assert.Throws<ArgumentException>(
+                () => colorTransparencyResolver.CalculateTransparentColor(0, WhiteColor, 1.1));
         }
     }
 

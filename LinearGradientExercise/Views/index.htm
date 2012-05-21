@@ -2,10 +2,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <link rel="stylesheet" href="content/css/farbtastic.css" type="text/css" />
 </head>
 <body>
+    <div>
+        <h1>Pick a color:</h1>
+        <div id="colorpicker">
+        </div>
+        <form>
+        #<input type="text" id="color" name="color" value="" />
+        </form>
+        <h2>To generate a vertical linear gradient below:</h2>
+        <div id="svg"></div>
+        
+    </div>
+    <script type="text/javascript" src="content/scripts/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="content/scripts/farbtastic.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var $colorpicker = $('#colorpicker');
 
-<object data="svg/FF0000" type="image/svg+xml"></object>
+            $colorpicker.farbtastic(function (color) {
+                color = color.replace('#', '');
+                $('#color').val(color);
 
+                var url = 'verticalLinearGradient/' + color;
+                $('#svg').html('').append('<object id="svg-holder" data="' + url + '" type="image/svg+xml"><img src="' + url + '"</object>');
+            });
+
+            $('#color').keyup(function () {
+                var color = $(this).val();
+
+                if (color.length == 6) {
+                    $.farbtastic('#colorpicker').setColor('#' + color);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

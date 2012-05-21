@@ -2,7 +2,7 @@
 
 namespace LinearGradientExercise.Utils
 {
-    public class ColorTransparencyHelper
+    public class ColorTransparencyResolver
     {
         public double CalculateTransparentColor(int color, int opacityColor, double opacity)
         {

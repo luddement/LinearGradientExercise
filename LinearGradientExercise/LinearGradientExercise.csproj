@@ -47,25 +47,24 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\farbtastic.css" />
+    <Content Include="Content\scripts\farbtastic.js" />
+    <Content Include="Content\scripts\jquery-1.7.2.min.js" />
+    <Content Include="Content\css\marker.png" />
+    <Content Include="Content\css\mask.png" />
+    <Content Include="Content\css\wheel.png" />
     <Content Include="Views\index.htm" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Svg\VerticalLinearGradientFactory.cs" />
-    <Compile Include="Utils\CalculateTransparentColor.cs" />
     <Compile Include="Validators\ColorValidator.cs" />
-    <Compile Include="HomeModule.cs" />
-    <Compile Include="Models\RgbHexColor.cs" />
+    <Compile Include="Controllers\HomeModule.cs" />
+    <Compile Include="Models\Color.cs" />
     <Compile Include="Models\SvgStop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\HexDecimalConverter.cs" />
-    <Compile Include="Utils\ColorTransparencyHelper.cs" />
+    <Compile Include="Utils\ColorTransparencyResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

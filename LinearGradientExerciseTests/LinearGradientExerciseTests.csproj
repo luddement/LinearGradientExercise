@@ -55,12 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegrationTests\CustomPathProvider.cs" />
+    <Compile Include="Setup\CustomPathProvider.cs" />
     <Compile Include="IntegrationTests\LinearGradientExerciseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\HexDecimalConverterTests.cs" />
-    <Compile Include="Util\RgbHexColorTransparencyTests.cs" />
-    <Compile Include="ValidatiorTests\ColorValidatorTests.cs" />
+    <Compile Include="UnitTests\Utils\HexDecimalConverterTests.cs" />
+    <Compile Include="UnitTests\Utils\ColorTransparencyResolverTests.cs" />
+    <Compile Include="UnitTests\ValidatiorTests\ColorValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

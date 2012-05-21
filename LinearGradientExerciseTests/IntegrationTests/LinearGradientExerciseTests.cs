@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using LinearGradientExercise.Controllers;
+using LinearGradientExerciseTests.Setup;
 using NUnit.Framework;
 using Nancy;
 using Nancy.Testing;
@@ -28,14 +30,21 @@ namespace LinearGradientExerciseTests.IntegrationTests
         }
 
         [Test]
-        public void Response_ShouldReturnStatusOk_WhenRouteExists()
+        public void Response_ShouldReturnStatusOk_WhenRouteAndColorExists()
         {
             var response = DoGetRequest(VerticalLinearGradientFF0000RequestUrl);
 
             Assert.That(response.StatusCode == HttpStatusCode.OK);
         }
 
+        [Test]
+        public void Response_ShouldReturnStatusError_WhenColorIsInvalid()
+        {
+            var response = DoGetRequest("/verticalLinearGradient/ff000z");
 
+            Assert.That(response.StatusCode == HttpStatusCode.InternalServerError);
+        }
+        
         [Test]
         public void Response_ShouldReturnASvg()
         {

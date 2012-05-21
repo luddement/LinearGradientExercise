@@ -1,9 +1,9 @@
 ﻿using LinearGradientExercise.Models;
 using LinearGradientExercise.Svg;
-using Nancy;
 using LinearGradientExercise.Validators;
+using Nancy;
 
-namespace LinearGradientExercise
+namespace LinearGradientExercise.Controllers
 {
     public class HomeModule : NancyModule
     {
@@ -12,19 +12,20 @@ namespace LinearGradientExercise
             var colorValidator = new ColorValidator();
             var verticalLinearGradientFactory = new VerticalLinearGradientFactory();
 
+
             Get["/"] = x => { return View["index"]; };
 
-            Get["/verticalLinearGradient/{color}"] = x =>
+            Get["/verticalLinearGradient/{selectedColor}"] = x =>
                                     {
-                                        string color = (string)x.color;
-                                        if (!colorValidator.IsHexadecimalRgbColor(color))
+                                        string selectedColor = (string)x.selectedColor;
+                                        if (!colorValidator.IsHexadecimalRgbColor(selectedColor))
                                         {
                                             return 500;
                                         }
 
-                                        RgbHexColor rgbHexColor = new RgbHexColor(color);
+                                        Color color = new Color(selectedColor);
 
-                                        var model = verticalLinearGradientFactory.CreateSvgStops(rgbHexColor);
+                                        var model = verticalLinearGradientFactory.CreateSvgStops(color);
 
                                         return View["verticalLinearGradient", model]
                                             .WithContentType("image/svg+xml");

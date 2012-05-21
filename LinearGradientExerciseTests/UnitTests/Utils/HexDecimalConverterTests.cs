@@ -1,7 +1,7 @@
 ﻿using LinearGradientExercise.Utils;
 using NUnit.Framework;
 
-namespace LinearGradientExerciseTests.Util
+namespace LinearGradientExerciseTests.UnitTests.Utils
 {
     [TestFixture]
     public class HexDecimalConverterTests
