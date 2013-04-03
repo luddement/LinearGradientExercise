@@ -16,16 +16,4 @@ Den här committen kommer inte synas
 
 SKA PUSHAS!
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-nu blir det konflikt
-
-ÄNDRAD!
-
+ändrad från promote-subtreee
