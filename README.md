@@ -16,6 +16,7 @@ Den här committen kommer inte synas
 
 SKA PUSHAS!
 
+<<<<<<< HEAD
 
 
 
@@ -25,3 +26,6 @@ SKA PUSHAS!
 
 
 nu blir det konflikt
+
+ÄNDRAD!
+
